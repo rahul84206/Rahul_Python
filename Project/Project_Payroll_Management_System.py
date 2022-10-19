@@ -88,7 +88,8 @@ while True:
             mgross = mbasic+mda+mhra
             mnet = mgross-mtax
             rec = (mempno, mname, mjob, mbasic, mda, mhra, mgross, mtax, mnet)
-            query = "insert into "+TableName + "values (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+            query = "insert into "+TableName + \
+                " values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             mycursor.execute(query, rec)
 
             mydb.commit()
@@ -100,7 +101,8 @@ while True:
         try:
             query = 'select * from '+TableName
             mycursor.execute(query)
-            print(tabulate(mycursor, headers=['Emp No.', 'Name', 'Job', 'Basic Salary','DA', 'HRA', 'Gross Salary', 'Tax', 'Net Salary'], tablefmt='fancy_grid'))
+            print(tabulate(mycursor, headers=['Emp No.', 'Name', 'Job', 'Basic Salary',
+                  'DA', 'HRA', 'Gross Salary', 'Tax', 'Net Salary'], tablefmt='fancy_grid'))
             '''myrecords=mycursor.fetchcall()
             for rec in myrecords:
                 print(rec)'''
@@ -234,7 +236,8 @@ while True:
             print('\nSomething went wrong! ', e)
     elif choice == 9:
         try:
-            en = input("Enter employee no. whose pay slip you want to retrieve: ")
+            en = input(
+                "Enter employee no. whose pay slip you want to retrieve: ")
             query = 'select * from '+TableName+' where EmpNo='+en
             mycursor.execute(query)
             now = datetime.datetime.now()
